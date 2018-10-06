@@ -1,0 +1,154 @@
+enum UserGroup {
+  ADMIN
+  WRITER
+  USER
+  SUBSCRIBER
+  BANNED
+  GUEST
+}
+
+enum Permission {
+  OWNER_READ
+  OWNER_WRITE
+  OWNER_DELETE
+  GROUP_READ
+  GROUP_WRITE
+  GROUP_DELETE
+  OTHER_READ
+  OTHER_WRITE
+  OTHER_DELETE
+}
+
+type Image {
+  id: ID! @unique
+  title: String!
+  path: String! @unique
+  mimeType: String!
+  size: Float!
+  extension: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Role {
+  id: ID! @unique
+  name: String! @unique
+  users: [User!]!
+  Permissions: [Permission!]!
+}
+
+type User {
+  id: ID! @unique
+  group: UserGroup! @default(value: USER)
+  roles: [Role!]!
+  name: String!
+  username: String!
+  email: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Language {
+  id: ID! @unique
+  name: String! @unique
+  localName: String! @unique
+  shortName: String! @unique
+  flag: String!
+}
+
+type ArticleCategory {
+  id: ID! @unique
+  slug: String!
+  thumbnail: Image!
+  translations: [ArticleCategoryTranslation!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ArticleCategoryTranslation {
+  id: ID! @unique
+  articleCategory: ArticleCategory!
+  language: Language!
+  title: String!
+  description: String
+}
+
+type Tag {
+  id: ID! @unique
+  name: String!
+}
+
+enum ArticleStatus {
+  PENDING
+  DRAFTING
+  PUBLISHING
+  SUSPENDING
+  TRASHING
+}
+
+type Article {
+  id: ID! @unique
+  isPinned: Boolean!
+  status: ArticleStatus! @default(value: PENDING)
+  category: [ArticleCategory!]!
+  translations: [ArticleTranslation!]!
+  tags: [Tag!]!
+  attachements: [File!]!
+  author: User!
+  slug: String!
+  thumbnail: String!
+  publishedAt: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ArticleTranslation {
+  id: ID! @unique
+  article: Article!
+  language: Language!
+  title: String!
+  description: String!
+  detail: String!
+  translateBy: User
+}
+
+type ArticleRating {
+  id: ID! @unique
+  rate: Int!
+  article: Article!
+  user: User
+  ipAddress: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum ReplyStatus {
+  PENDING
+  PUBLISHING
+  SUSPENDING
+  TRASHING
+}
+
+type ReplyArticle {
+  id: ID! @unique
+  status: ReplyStatus! @default(value: PENDING)
+  article: Article!
+  isUser: Boolean! @default(value: false)
+  user: User
+  ipAddress: String
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type File {
+  id: ID! @unique
+  title: String!
+  path: String! @unique
+  mimeType: String!
+  size: Float!
+  extension: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
