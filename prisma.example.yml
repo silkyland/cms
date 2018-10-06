@@ -1,0 +1,10 @@
+endpoint: https://us1.prisma.sh/bundit-nuntates-8ecb11/cms/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma
+
+hooks:
+  post-deploy:
+    - prisma generate

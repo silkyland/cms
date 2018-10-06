@@ -4,8 +4,9 @@
 
 ### Node ###
 
-# Prisma Generate
+# Prisma
 generated
+prisma.yml
 
 # Logs
 logs
