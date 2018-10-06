@@ -94,7 +94,7 @@ type Article {
   category: [ArticleCategory!]!
   translations: [ArticleTranslation!]!
   tags: [Tag!]!
-  attachements: [File!]!
+  attachments: [File!]!
   author: User!
   slug: String!
   thumbnail: String!
