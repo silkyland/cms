@@ -1,4 +1,4 @@
-endpoint: https://us1.prisma.sh/bundit-nuntates-8ecb11/cms/dev
+endpoint: "_PLACE_YOUR_ENDPOINT_HERE_"
 datamodel: datamodel.prisma
 
 generate:

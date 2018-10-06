@@ -1,0 +1,7 @@
+type Auth {
+  user: String!
+}
+
+type Query {
+  auth: Auth!
+}
